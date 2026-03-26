@@ -1,0 +1,8 @@
+.inv-header { display: flex; justify-content: space-between; margin-bottom: 24px; }
+.inv-search { padding: 10px; width: 250px; border: 1px solid var(--border-color); border-radius: 8px; }
+.inv-add { background: var(--brand-color); color: white; padding: 10px 16px; border: none; border-radius: 8px; cursor: pointer; }
+.inv-table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; }
+.inv-table th, .inv-table td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border-color); }
+.status { padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: bold; }
+.st-in { background: #d1fae5; color: #047857; }
+.st-out { background: #fee2e2; color: #b91c1c; }

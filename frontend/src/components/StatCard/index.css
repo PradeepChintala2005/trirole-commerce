@@ -1,0 +1,10 @@
+.stat-card {
+  background: white; padding: 24px; border-radius: 12px;
+  border: 1px solid var(--border-color); box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.stat-title { font-size: 14px; color: var(--text-secondary); margin: 0 0 8px 0; }
+.stat-data { display: flex; justify-content: space-between; align-items: flex-end; }
+.stat-value { font-size: 28px; font-weight: bold; margin: 0; }
+.stat-trend { font-size: 12px; font-weight: bold; padding: 4px 8px; border-radius: 6px; }
+.trend-pos { background: #d1fae5; color: #047857; }
+.trend-neg { background: #fee2e2; color: #b91c1c; }

@@ -1,0 +1,104 @@
+:root {
+  --bg-main: #f8fafc;
+  --bg-sidebar: #0f172a;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --brand-color: #4f46e5;
+  --border-color: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-sidebar {
+  width: 260px;
+  background-color: var(--bg-sidebar);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand { padding: 24px; }
+.sidebar-title { 
+  margin: 0; 
+  font-size: 24px; 
+  color: white; 
+}
+.sidebar-nav { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.sidebar-footer { padding: 16px; border-top: 1px solid #1e293b; }
+
+.app-main { flex: 1; overflow-y: auto; }
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: white;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+}
+.app-header h2 { margin: 0; font-size: 20px; text-transform: capitalize; }
+.page-content { padding: 32px; }
+
+/* Micro UX Enhancements */
+.sidebar-btn {
+  transition: all 0.2s ease;
+}
+.sidebar-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+  background-color: rgba(255, 255, 255, 0.05); /* subtle glow on dark sidebar */
+}
+.sidebar-btn.active {
+  background: #1e293b;
+  color: white;
+  border-radius: 6px;
+}
+
+.inv-add {
+  transition: all 0.2s ease;
+}
+.inv-add:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.loading-spinner {
+  border: 4px solid #eee;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.global-loading-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background-color: var(--brand-color);
+  z-index: 1000;
+  animation: loading-bar 1.5s ease-in-out infinite;
+  box-shadow: 0 0 10px var(--brand-color);
+}
+
+@keyframes loading-bar {
+  0% { left: -100%; width: 50%; }
+  100% { left: 100%; width: 50%; }
+}

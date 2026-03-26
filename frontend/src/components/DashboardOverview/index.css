@@ -1,0 +1,3 @@
+.dash-grid-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 24px; }
+.dash-grid-bot { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+.chart-box { background: white; padding: 32px; border-radius: 16px; border: 1px solid var(--border-color); text-align: center; }
