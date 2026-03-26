@@ -22,13 +22,18 @@ const register = async (req, res, next) => {
         // 2. Create linked Customer Profile if applicable
         await req.db.run(
             'INSERT INTO customers (user_id, name, email) VALUES (?, ?, ?)',
-            [userId, name || username, email || `${username}@example.com`]
+            [userId, name || username, email || `${username}@mail.com`]
         );
 
         await req.db.exec('COMMIT');
         return sendSuccess(res, { id: userId, username, role: 'customer' }, 'Customer account created', 201);
     } catch (err) {
-        await req.db.exec('ROLLBACK');
+        try{
+            await req.db.exec('ROLLBACK');
+        }
+        catch(e){
+            console.log("Rollback skipped:",e.message)
+        }
         if (err.message.includes('UNIQUE constraint failed')) {
             return sendError(res, 400, 'Username or Email already exists');
         }
