@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { LayoutDashboard, Package, ShoppingCart, Users, UserCog, Store, Bookmark, LogOut } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, Users, UserCog, Store, Bookmark, LogOut, Menu, X } from 'lucide-react';
 import './App.css'; 
 
 import SidebarItem from './components/SidebarItem';
@@ -43,7 +43,7 @@ const ROLE_MENUS = {
   ]
 };
 
-function Sidebar({ role }) {
+function Sidebar({ role, isOpen, closeSidebar }) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -56,11 +56,16 @@ function Sidebar({ role }) {
   const menu = ROLE_MENUS[role] || [];
 
   return (
-    <aside className="app-sidebar">
-      <div className="sidebar-brand"><h1 className="sidebar-title">TriRole Commerce</h1></div>
+    <>
+      {isOpen && <div className="mobile-overlay" onClick={closeSidebar} />}
+      <aside className={`app-sidebar ${isOpen ? 'open' : ''}`}>
+        <div className="sidebar-brand" style={{position: 'relative'}}>
+          <h1 className="sidebar-title">TriRole Commerce</h1>
+          <X className="close-sidebar-btn" size={24} onClick={closeSidebar} />
+        </div>
       <nav className="sidebar-nav">
         {menu.map(item => (
-          <div key={item.path} onClick={() => navigate(item.path)}>
+          <div key={item.path} onClick={() => { navigate(item.path); closeSidebar(); }}>
             <SidebarItem icon={item.icon} label={item.label} isActive={location.pathname === item.path} />
           </div>
         ))}
@@ -71,10 +76,11 @@ function Sidebar({ role }) {
         </div>
       </div>
     </aside>
+    </>
   );
 }
 
-function MainContent({ user }) {
+function MainContent({ user, toggleSidebar }) {
   const location = useLocation();
   const [isNavigating, setIsNavigating] = React.useState(false);
 
@@ -96,7 +102,10 @@ function MainContent({ user }) {
     <main className="app-main" style={{position: 'relative'}}>
       {isNavigating && <div className="global-loading-bar" />}
       <header className="app-header">
-        <h2 style={{textTransform: 'capitalize'}}>{getTitle()}</h2>
+        <div style={{display:'flex', alignItems:'center'}}>
+          <Menu className="mobile-nav-toggle" size={24} onClick={toggleSidebar} />
+          <h2 style={{textTransform: 'capitalize'}}>{getTitle()}</h2>
+        </div>
         <div style={{fontWeight: 'bold', color: 'var(--brand-color)'}}>
           {ROLE_ICONS[user?.role]} {user?.role.charAt(0).toUpperCase() + user?.role.slice(1)} | {user?.username || 'User'}
         </div>
@@ -143,6 +152,7 @@ function MainContent({ user }) {
 function App() {
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user')));
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('auth_token'));
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogin = (userData) => {
     setUser(userData);
@@ -163,8 +173,8 @@ function App() {
     <Router>
       <div className="app-container">
         <ToastContainer position="top-right" autoClose={3000} />
-        <Sidebar role={user.role} />
-        <MainContent user={user} />
+        <Sidebar role={user.role} isOpen={sidebarOpen} closeSidebar={() => setSidebarOpen(false)} />
+        <MainContent user={user} toggleSidebar={() => setSidebarOpen(true)} />
       </div>
     </Router>
   );

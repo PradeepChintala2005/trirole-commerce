@@ -44,7 +44,7 @@ function DashboardOverview() {
         <StatCard title="Out of Stock" value={stats.outOfStock} trend="+0" isPositive={false} />
       </div>
       
-      <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '20px', marginTop: '20px'}}>
+      <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '20px', marginTop: '20px'}}>
         {/* Graph 1: Monthly Orders */}
         <div style={{background: '#fff', padding: '20px', borderRadius: '8px', border: '1px solid var(--border-color)'}}>
            <h3 style={{marginTop: 0, marginBottom: '20px'}}>Monthly Orders</h3>
