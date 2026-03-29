@@ -93,26 +93,16 @@ function StorefrontPage() {
   });
 
   return (
-    <div style={{ padding: '0 32px 40px 32px', maxWidth: '1400px', margin: '0 auto' }}>
+    <div className="page-wrapper">
       
       {/* Banner Section - Only visible if not searching */}
       {!searchTerm && (
-        <div style={{ 
-          background: 'linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%)', 
-          borderRadius: '24px', 
-          padding: '48px 60px', 
-          color: 'white', 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'space-between',
-          margin: '32px 0',
-          boxShadow: '0 10px 25px -5px rgba(46, 125, 50, 0.4)'
-        }}>
-           <div>
-             <h1 style={{ fontSize: '48px', margin: '0 0 16px 0', fontWeight: '800', letterSpacing: '-1px' }}>Chaturveda Ayurvedics 🌿</h1>
-             <p style={{ fontSize: '20px', margin: 0, opacity: 0.9, maxWidth: '600px', lineHeight: 1.6, fontWeight: '500' }}>Discover inner peace and vital energy with our curated collection of ancient remedies, organic oils, and holistic wellness solutions.</p>
+        <div className="hero-banner">
+           <div className="hero-text">
+             <h1>Chaturveda Ayurvedics 🌿</h1>
+             <p>Discover inner peace and vital energy with our curated collection of ancient remedies, organic oils, and holistic wellness solutions.</p>
            </div>
-           <div style={{ fontSize: '100px', opacity: 0.9, filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.2))' }}>✨</div>
+           <div className="hero-icon" style={{ fontSize: '100px', opacity: 0.9, filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.2))' }}>✨</div>
         </div>
       )}
 
@@ -120,7 +110,7 @@ function StorefrontPage() {
       {!searchTerm && (
          <div style={{ marginBottom: '40px' }}>
             <h2 style={{ fontSize: '26px', color: '#3e2723', marginBottom: '24px', fontWeight: '800' }}>Explore by Category</h2>
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            <div className="categories-grid">
                <button onClick={() => setFilterCategory('')} style={{ padding: '12px 24px', borderRadius: '30px', border: filterCategory === '' ? 'none' : '2px solid #a5d6a7', background: filterCategory === '' ? '#2e7d32' : 'transparent', color: filterCategory === '' ? 'white' : '#2e7d32', fontWeight: '800', cursor: 'pointer', transition: '0.2s', fontSize: '16px' }}>All Natural 🌿</button>
                {categories.map(c => (
                    <button key={c.id} onClick={() => setFilterCategory(c.id.toString())} style={{ padding: '12px 24px', borderRadius: '30px', border: filterCategory === c.id.toString() ? 'none' : '2px solid #a5d6a7', background: filterCategory === c.id.toString() ? '#2e7d32' : 'transparent', color: filterCategory === c.id.toString() ? 'white' : '#2e7d32', fontWeight: '800', cursor: 'pointer', transition: '0.2s', fontSize: '16px' }}>{c.name}</button>

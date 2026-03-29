@@ -140,3 +140,115 @@ body {
   border-color: var(--brand-color);
 }
 
+/* Storefront Responsive Layouts */
+.storefront-nav {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 16px 32px;
+   background: var(--brand-color);
+   color: white;
+   position: sticky;
+   top: 0;
+   z-index: 1000;
+   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.storefront-search {
+   flex: 1;
+   max-width: 600px;
+   display: flex;
+   margin: 0 24px;
+}
+
+.storefront-actions {
+   display: flex;
+   align-items: center;
+   gap: 24px;
+}
+
+.hero-banner {
+   background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+   border-radius: 24px;
+   padding: 48px 60px;
+   color: white;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin: 32px 0;
+   box-shadow: 0 10px 25px -5px rgba(46, 125, 50, 0.4);
+}
+
+.hero-text h1 {
+   font-size: 48px;
+   margin: 0 0 16px 0;
+   font-weight: 800;
+   letter-spacing: -1px;
+}
+
+.hero-text p {
+   font-size: 20px;
+   margin: 0;
+   opacity: 0.9;
+   max-width: 600px;
+   line-height: 1.6;
+   font-weight: 500;
+}
+
+.page-wrapper {
+   padding: 0 32px 40px 32px;
+   max-width: 1400px;
+   margin: 0 auto;
+}
+
+.categories-grid {
+   display: flex;
+   gap: 16px;
+   flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .storefront-nav {
+     flex-direction: column;
+     padding: 12px 16px;
+     gap: 16px;
+  }
+  .storefront-search {
+     width: 100%;
+     margin: 0;
+     max-width: none;
+  }
+  .storefront-search input {
+     width: 100%;
+  }
+  .storefront-actions {
+     width: 100%;
+     justify-content: space-between;
+     gap: 12px;
+  }
+  .hero-banner {
+     flex-direction: column;
+     padding: 32px 24px;
+     text-align: center;
+  }
+  .hero-banner .hero-icon {
+     display: none;
+  }
+  .hero-text h1 {
+     font-size: 32px;
+  }
+  .hero-text p {
+     font-size: 16px;
+  }
+  .page-wrapper {
+     padding: 0 16px 24px 16px;
+  }
+  .categories-grid {
+     gap: 8px;
+  }
+  .categories-grid button {
+     font-size: 14px !important;
+     padding: 8px 16px !important;
+  }
+}
+

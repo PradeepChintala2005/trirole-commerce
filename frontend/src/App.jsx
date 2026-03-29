@@ -111,7 +111,7 @@ function TopNavbar({ user }) {
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 32px', background: '#2e7d32', color: 'white', position: 'sticky', top: 0, zIndex: 1000, boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+    <header className="storefront-nav">
        {/* Logo */}
        <div onClick={() => navigate('/')} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px' }}>
          <img src="/logo.webp" alt="Ayurvedic Logo" style={{ height: '44px', objectFit: 'contain' }} onError={(e)=>e.target.style.display='none'} />
@@ -119,15 +119,15 @@ function TopNavbar({ user }) {
        </div>
        
        {/* Search */}
-       <form onSubmit={handleSearch} style={{ flex: 1, maxWidth: '600px', display: 'flex', margin: '0 24px' }}>
+       <form onSubmit={handleSearch} className="storefront-search">
          <input type="text" placeholder="Search 100% natural ayurvedic products..." value={search} onChange={(e) => setSearch(e.target.value)} style={{ flex: 1, padding: '12px 20px', borderRadius: '8px 0 0 8px', border: 'none', outline: 'none', color: '#3e2723', fontSize: '15px' }} />
          <button type="submit" style={{ padding: '12px 28px', background: '#a5d6a7', border: 'none', borderRadius: '0 8px 8px 0', cursor: 'pointer', color: '#2e7d32', fontWeight: '800', fontSize: '15px' }}>Search</button>
        </form>
 
        {/* Actions */}
-       <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+       <div className="storefront-actions">
           {user.role === 'guest' ? (
-             <div onClick={() => navigate('/login')} style={{ cursor: 'pointer', fontWeight: '700', fontSize: '15px', padding: '10px 20px', border: '2px solid #a5d6a7', borderRadius: '8px', transition: 'all 0.2s', background: 'transparent' }}>Login / Register</div>
+             <div onClick={() => navigate('/login')} style={{ cursor: 'pointer', fontWeight: '700', fontSize: '15px', padding: '10px 20px', border: '2px solid #a5d6a7', borderRadius: '8px', transition: 'all 0.2s', background: 'transparent', textAlign: 'center' }}>Login / Register</div>
           ) : (
              <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                 <div onClick={() => navigate('/my-orders')} style={{ cursor: 'pointer', fontWeight: '700', fontSize: '15px', color: '#fff', display: user.role === 'customer' ? 'block' : 'none' }}>My Orders</div>
