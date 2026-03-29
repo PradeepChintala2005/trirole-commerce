@@ -14,7 +14,7 @@ function InventoryPage() {
   
   // Create / Edit State
   const [editingProduct, setEditingProduct] = useState(null);
-  const [newProduct, setNewProduct] = useState({ name: '', category_id: '', price: '', stock: '', status: 'active' });
+  const [newProduct, setNewProduct] = useState({ name: '', description: '', category_id: '', price: '', stock: '', status: 'active' });
 
   // Advanced Filtering State
   const [searchTerm, setSearchTerm] = useState('');
@@ -22,7 +22,14 @@ function InventoryPage() {
   const [filterStatus, setFilterStatus] = useState('all'); // all, active, inactive
   const [sortPrice, setSortPrice] = useState('none'); // none, asc, desc
 
-  const currentUser = JSON.parse(localStorage.getItem('user')) || {};
+  const currentUser = (() => {
+      try {
+          const stored = localStorage.getItem('user');
+          return (stored && stored !== 'undefined') ? JSON.parse(stored) : {};
+      } catch (e) {
+          return {};
+      }
+  })();
 
   const fetchData = async () => {
     try {
@@ -60,6 +67,7 @@ function InventoryPage() {
     setEditingProduct(p);
     setNewProduct({
       name: p.name,
+      description: p.description || '',
       category_id: p.category_id || '',
       price: p.price,
       stock: p.stock,
@@ -71,7 +79,7 @@ function InventoryPage() {
   const handleCancelForm = () => {
       setShowAddForm(false);
       setEditingProduct(null);
-      setNewProduct({ name: '', category_id: '', price: '', stock: '', status: 'active' });
+      setNewProduct({ name: '', description: '', category_id: '', price: '', stock: '', status: 'active' });
   };
 
   const handleSubmit = async (e) => {
@@ -198,6 +206,8 @@ function InventoryPage() {
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
+            
+            <textarea placeholder="Product Description..." value={newProduct.description} onChange={e => setNewProduct({...newProduct, description: e.target.value})} style={{width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #ccc', minHeight: '80px', fontFamily: 'inherit'}} />
             
             <button type="submit" className="inv-add" style={{background: editingProduct ? '#007bff' : '#28a745'}}>
                {editingProduct ? 'Save Changes' : 'Add Product'}

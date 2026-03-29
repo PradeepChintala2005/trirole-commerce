@@ -38,13 +38,13 @@ const getProducts = async (req, res, next) => {
 };
 
 const createProduct = async (req, res, next) => {
-    const { name, category_id, price, stock, status } = req.body;
+    const { name, description, category_id, price, stock, status } = req.body;
     try {
         await req.db.exec('BEGIN TRANSACTION');
         
         const result = await req.db.run(
-            'INSERT INTO products (name, category_id, price, stock, status) VALUES (?, ?, ?, ?, ?)',
-            [name, category_id, price, stock, status || 'active']
+            'INSERT INTO products (name, description, category_id, price, stock, status) VALUES (?, ?, ?, ?, ?, ?)',
+            [name, description || '', category_id, price, stock, status || 'active']
         );
         
         // Log history
@@ -63,7 +63,7 @@ const createProduct = async (req, res, next) => {
 
 const updateProduct = async (req, res, next) => {
     const { id } = req.params;
-    const { name, category_id, price, stock, status, stock_change_amount } = req.body; // e.g. +5 or -2
+    const { name, description, category_id, price, stock, status, stock_change_amount } = req.body; // e.g. +5 or -2
     try {
         await req.db.exec('BEGIN TRANSACTION');
 
@@ -97,8 +97,8 @@ const updateProduct = async (req, res, next) => {
         }
 
         await req.db.run(
-            'UPDATE products SET name = COALESCE(?, name), category_id = COALESCE(?, category_id), price = COALESCE(?, price), stock = ?, status = COALESCE(?, status) WHERE id = ?',
-            [name, category_id, price, newStock, status, id]
+            'UPDATE products SET name = COALESCE(?, name), description = COALESCE(?, description), category_id = COALESCE(?, category_id), price = COALESCE(?, price), stock = ?, status = COALESCE(?, status) WHERE id = ?',
+            [name, description, category_id, price, newStock, status, id]
         );
 
         await req.db.exec('COMMIT');

@@ -1,10 +1,11 @@
 :root {
-  --bg-main: #f8fafc;
-  --bg-sidebar: #0f172a;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --brand-color: #4f46e5;
-  --border-color: #e2e8f0;
+  --bg-main: #f9fbf9;
+  --bg-sidebar: #2e7d32;
+  --text-primary: #3e2723;
+  --text-secondary: #6d4c41;
+  --brand-color: #2e7d32;
+  --border-color: #a5d6a7;
+  --accent-color: #6d4c41;
 }
 
 body {
@@ -128,3 +129,14 @@ body {
   0% { left: -100%; width: 50%; }
   100% { left: 100%; width: 50%; }
 }
+
+.store-product-card {
+  transition: all 0.3s ease;
+}
+
+.store-product-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: var(--brand-color);
+}
+

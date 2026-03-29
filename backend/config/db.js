@@ -30,6 +30,7 @@ async function setupDatabase() {
         CREATE TABLE IF NOT EXISTS products (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
+            description TEXT DEFAULT '',
             category_id INTEGER,
             price REAL NOT NULL,
             stock INTEGER NOT NULL,
@@ -88,7 +89,7 @@ async function setupDatabase() {
     // Seed default categories
     const catCount = await db.get("SELECT COUNT(*) as count FROM categories");
     if (catCount.count === 0) {
-        await db.run("INSERT INTO categories (name) VALUES ('Electronics'), ('Furniture'), ('Office'), ('Software')");
+        await db.run("INSERT INTO categories (name) VALUES ('Herbs'), ('Oils'), ('Skincare'), ('Immunity Boosters'), ('Hair Care'), ('Digestive Health'), ('Wellness Supplements'), ('Natural Remedies')");
         console.log('Categories seeded.');
     }
 
